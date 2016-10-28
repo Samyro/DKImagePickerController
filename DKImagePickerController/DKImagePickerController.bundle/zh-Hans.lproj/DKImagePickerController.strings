@@ -29,3 +29,5 @@
 "maxLimitReached" = "最大数限制";
 
 "maxLimitReachedMessage" = "你能选择%ld项";
+
+"atLeastSelectedCount" = "最少选择%d张照片";

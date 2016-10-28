@@ -129,6 +129,9 @@ open class DKImagePickerController : UINavigationController {
 		
     /// The maximum count of assets which the user will be able to select.
     public var maxSelectableCount = 999
+    
+    /// The min count of assets selected
+    public var minSelectedCount = 0
 	
 	/// Set the defaultAssetGroup to specify which album is the default asset group.
 	public var defaultAssetGroup: PHAssetCollectionSubtype?
@@ -399,9 +402,17 @@ open class DKImagePickerController : UINavigationController {
 	}
 	
     public func done() {
-		 self.presentingViewController?.dismiss(animated: true, completion: {
-		 	self.didSelectAssets?(self.selectedAssets)
-		 })
+        if self.sourceType == .photo && self.selectedAssets.count < self.minSelectedCount {
+            UIAlertView(title: nil,
+                        message: String(format: DKImageLocalizedStringWithKey("atLeastSelectedCount"), self.minSelectedCount),
+                        delegate: nil,
+                        cancelButtonTitle: DKImageLocalizedStringWithKey("ok"))
+                .show()
+        } else {
+            self.presentingViewController?.dismiss(animated: true, completion: {
+                self.didSelectAssets?(self.selectedAssets)
+            })
+        }
     }
     
     // MARK: - Selection
