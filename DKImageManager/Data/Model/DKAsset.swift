@@ -48,7 +48,7 @@ open class DKAsset: NSObject {
 	}
 	
 	private var image: UIImage?
-	init(image: UIImage) {
+	public init(image: UIImage) {
 		super.init()
         
 		self.image = image
